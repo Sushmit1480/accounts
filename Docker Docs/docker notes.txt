@@ -1,0 +1,74 @@
+to create jar file
+mvn clean install
+
+to create image
+docker build . -t sgpatil1408/accounts:s4
+
+to see images in system
+docker images
+
+to inspect image
+docket inspect image image_id
+
+to run image
+docker run -p 8080:8080 sgpatil1408/accounts:s4
+
+to run image in detached mode
+docker run -d -p 8080:8080 sgpatil1408/accounts:s4
+
+to see which images are running
+docker ps
+
+to see all images which are running and closed
+docker ps -a
+
+start and stop of already created container using container id
+
+docker start 95c82f81d0628c686973808c37c3a85cf7a6fb6fe4111c2a3efd9c22d89db13c
+doscker stop 95c82f81d0628c686973808c37c3a85cf7a6fb6fe4111c2a3efd9c22d89db13c
+
+buildpackes method:
+add following in pom file in build section
+<image>
+						<name>sgpatil1408/${project.artifactId}:s4</name>
+					</image>
+					
+then run following command to generate image:
+mvn spring-boot:build-image
+
+using Google jib:
+add following plugin in pom file
+<plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <to>
+            <image>myimage</image>
+          </to>
+        </configuration>
+      </plugin>
+	  
+then run following command:
+mvn compile jib:dockerBuild
+
+command to push docker image from local to docker repository
+docker image push docker.io/sgpatil1408/accounts:s4
+
+to pull from docker hub use:
+docker pull sgpatil1408/cards:s4
+
+to run all containers for different microservice but using compose
+docker compose up
+
+to run all containers for different microservice but using compose in detached mode
+docker compose up -d
+
+to stop and remove all containers for different microservice
+docker compose down
+
+to stop all containers for different microservice
+docker compose stop
+
+to start all containers for different microservice which already preset
+docker compose start
